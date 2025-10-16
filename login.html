@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Register</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+      align-items: center;
+    }
+
+   
+
+    .container {
+      background: rgb(26, 125, 110);
+      width: 350px;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0px 6px 20px rgba(0,0,0,0.3);
+      justify-content: center;
+      align-items: center;
+      margin: 50px auto;
+
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form {
+      display: none;
+    }
+
+    .form.active {
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #2575fc;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #6a11cb;
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .link a {
+      color: #00050c;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .link a:hover {
+      text-decoration: underline;
+    }
+    nav {
+    background: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  nav .logo {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  nav ul li {
+    margin-left: 20px;
+  }
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 5px;
+  }
+  nav ul li a:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* Responsive toggle */
+  .menu-btn {
+    display: none;
+    font-size: 24px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 600px) {
+    nav ul {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background: #4CAF50;
+    }
+    nav ul li {
+      margin: 10px 0;
+      text-align: center;
+    }
+    .menu-btn {
+      display: block;
+    }
+  }
+
+    
+  </style>
+</head>
+<body>
+  <nav>
+  <div class="logo"><a href="/INDEX.HTML">MyWebsite</a></div>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <ul id="menu">
+    <li><a href="/INDEX.HTML">HOME</a></li>
+     <li><a href="/childhood.html">Childhood</a></li>
+    <li><a href="/school.html">school life</a></li>
+    <li><a href="/collage.html">college life</a></li>
+    <li><a href="/skils.html">skils</a></li>
+    <li><a href="/goals.html">my goals</a></li>
+    <li><a href="/gallery.html">gellery</a></li>
+     <li><a href="/contact.html">Contact</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/login.html">Login</a></li>
+  </ul>
+</nav>
+  <div class="container">
+    <!-- Login Form -->
+    <div class="form active" id="loginForm">
+      <h2>Login</h2>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <button>Login</button>
+      <div class="link">
+        <a href="#" onclick="showForm('registerForm')">New User? Register</a><br>
+        <a href="#" onclick="showForm('forgotForm')">Forgot Password?</a>
+      </div>
+    </div>
+
+    <!-- Register Form -->
+    <div class="form" id="registerForm">
+      <h2>Register</h2>
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <button>Register</button>
+      <div class="link">
+        <a href="#" onclick="showForm('loginForm')">Already have an account? Login</a>
+      </div>
+    </div>
+
+    <!-- Forgot Password Form -->
+    <div class="form" id="forgotForm">
+      <h2>Forgot Password</h2>
+      <input type="email" placeholder="Enter your email" required>
+      <button>Reset Password</button>
+      <div class="link">
+        <a href="#" onclick="showForm('loginForm')">Back to Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showForm(formId) {
+      document.querySelectorAll(".form").forEach(form => {
+        form.classList.remove("active");
+      });
+      document.getElementById(formId).classList.add("active");
+    }
+  </script>
+</body>
+</html>
