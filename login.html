@@ -11,155 +11,162 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #121212;
       color: #f0f0f0;
-      align-items: center;
     }
 
-   
+    nav {
+      background: black;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav .logo a {
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      text-decoration: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      transition: all .3s ease;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 5px;
+    }
+    nav ul li a:hover {
+      background: rgba(255,255,255,0.2);
+    }
 
+    .menu-btn {
+      display: none;
+      font-size: 28px;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* MOBILE MENU */
+    @media (max-width: 700px) {
+      nav ul {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #222;
+        flex-direction: column;
+        display: none;
+      }
+      nav ul.show {
+        display: flex;
+      }
+      nav ul li {
+        margin: 12px 0;
+        text-align: center;
+      }
+      .menu-btn {
+        display: block;
+      }
+    }
+
+    /* FORM CONTAINER */
     .container {
       background: rgb(26, 125, 110);
       width: 350px;
       padding: 25px;
       border-radius: 15px;
       box-shadow: 0px 6px 20px rgba(0,0,0,0.3);
-      justify-content: center;
-      align-items: center;
       margin: 50px auto;
+      transition: all .3s ease;
+    }
 
+    @media (max-width: 400px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
     }
 
     h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #333;
+      color: #fff;
     }
 
-    .form {
-      display: none;
-    }
-
-    .form.active {
-      display: block;
-    }
+    .form { display: none; }
+    .form.active { display: block; }
 
     input {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
+      padding: 12px;
+      margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 8px;
+      font-size: 16px;
     }
 
     button {
       width: 100%;
-      padding: 10px;
-      margin-top: 10px;
+      padding: 12px;
       border: none;
       border-radius: 8px;
       background: #2575fc;
       color: white;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
+      transition: .3s;
     }
-
     button:hover {
       background: #6a11cb;
     }
 
     .link {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 12px;
     }
-
     .link a {
-      color: #00050c;
+      color: black;
+      font-weight: bold;
       text-decoration: none;
-      font-size: 14px;
     }
-
     .link a:hover {
       text-decoration: underline;
     }
-    nav {
-    background: black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-  }
-  nav .logo {
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  nav ul li {
-    margin-left: 20px;
-  }
-  nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 6px 10px;
-    border-radius: 5px;
-  }
-  nav ul li a:hover {
-    background: rgba(255,255,255,0.2);
-  }
-
-  /* Responsive toggle */
-  .menu-btn {
-    display: none;
-    font-size: 24px;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  @media (max-width: 600px) {
-    nav ul {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      background: #4CAF50;
-    }
-    nav ul li {
-      margin: 10px 0;
-      text-align: center;
-    }
-    .menu-btn {
-      display: block;
-    }
-  }
-
-    
   </style>
 </head>
 <body>
+
   <nav>
- <div class="logo"><a href="./index.html">MyWebsite</a></div>
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
-  <ul id="menu">
-     <li><a href="./index.html">HOME</a></li>
-     <li><a href="./childhood.html">Childhood</a></li>
-    <li><a href="./school.html">school life</a></li>
-    <li><a href="./collage.html">college life</a></li>
-    <li><a href="./skils.html">skils</a></li>
-    <li><a href="./goals.html">my goals</a></li>
-    <li><a href="./gallery.html">gellery</a></li>
-     <li><a href="./contact.html">Contact</a></li>
-    <li><a href="./about.html">About</a></li>
-    <li><a href="./login.html">Login</a></li>
-  </ul>
-</nav>
+    <div class="logo"><a href="./index.html">MyWebsite</a></div>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <ul id="menu">
+      <li><a href="./index.html">HOME</a></li>
+      <li><a href="./childhood.html">Childhood</a></li>
+      <li><a href="./school.html">School Life</a></li>
+      <li><a href="./collage.html">College Life</a></li>
+      <li><a href="./skils.html">Skills</a></li>
+      <li><a href="./goals.html">My Goals</a></li>
+      <li><a href="./gallery.html">Gallery</a></li>
+      <li><a href="./contact.html">Contact</a></li>
+      <li><a href="./about.html">About</a></li>
+      <li><a href="./login.html">Login</a></li>
+    </ul>
+  </nav>
+
   <div class="container">
-    <!-- Login Form -->
     <div class="form active" id="loginForm">
       <h2>Login</h2>
       <input type="text" placeholder="Username" required>
@@ -171,7 +178,6 @@
       </div>
     </div>
 
-    <!-- Register Form -->
     <div class="form" id="registerForm">
       <h2>Register</h2>
       <input type="text" placeholder="Full Name" required>
@@ -184,7 +190,6 @@
       </div>
     </div>
 
-    <!-- Forgot Password Form -->
     <div class="form" id="forgotForm">
       <h2>Forgot Password</h2>
       <input type="email" placeholder="Enter your email" required>
@@ -197,11 +202,13 @@
 
   <script>
     function showForm(formId) {
-      document.querySelectorAll(".form").forEach(form => {
-        form.classList.remove("active");
-      });
-      document.getElementById(formId).classList.add("active");
-      alert("well come to login page");
+      document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
+      document.getElementById(formId).classList.add('active');
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.classList.toggle('show');
     }
   </script>
 </body>
