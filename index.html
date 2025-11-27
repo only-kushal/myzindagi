@@ -10,7 +10,13 @@
     font-family: Arial, sans-serif;
     background: #f4f4f4;
   }
-  /* Navbar styling */
+   footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1E1E1E;
+      color: #555;
+      font-size: 14px;
+    }
   nav {
     background: black;
     display: flex;
@@ -69,42 +75,176 @@
       display: block;
     }
   }
-  #home {
-    padding: 50px;
-    text-align: center;
-    background:rgb(0, 79, 118);
-    color:rgb(176, 116, 32);
-    height:auto;
+  /* === Home Section === */
+#home {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
 
+/* === Slider Wrapper === */
+.hero-slider {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+/* === Each Slide === */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* === Slide Images === */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+/* === Overlay === */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+  z-index: 2;
+}
+
+/* === Hero Text === */
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(0,255,136,0.6);
+  animation: fadeUp 2s ease forwards;
+}
+
+/* === Main Title === */
+.hero-text .title-glow {
+  font-size: 4rem;
+  margin-bottom: 10px;
+  color: #00ff88;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  animation: glowPulse 2s infinite alternate;
+}
+
+/* === Subtitle === */
+.hero-text .subtitle {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+/* === Description === */
+.hero-text p {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  letter-spacing: 1px;
+}
+
+/* === Animations === */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
   }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes glowPulse {
+  from {
+    text-shadow: 0 0 15px rgba(0,255,136,0.5);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(0,255,136,1), 0 0 50px rgba(0,255,136,0.8);
+  }
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  .hero-text .title-glow {
+    font-size: 2.5rem;
+  }
+  .hero-text .subtitle {
+    font-size: 1.2rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
 </style>
 </head>
 <body>
 <nav>
- <div class="logo"><a href="./index.html">MyWebsite</a></div>
+  <div class="logo">
+  <a href="/INDEX.HTML">MyWebsite</a>
+  </div>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
   <ul id="menu">
-     <li><a href="./index.html">HOME</a></li>
-     <li><a href="./childhood.html">Childhood</a></li>
-    <li><a href="./school.html">school life</a></li>
-    <li><a href="./collage.html">college life</a></li>
-    <li><a href="./skils.html">skils</a></li>
-    <li><a href="./goals.html">my goals</a></li>
-    <li><a href="./gallery.html">gellery</a></li>
-     <li><a href="./contact.html">Contact</a></li>
-    <li><a href="./about.html">About</a></li>
-    <li><a href="./login.html">Login</a></li>
+     <li><a href="/INDEX.HTML">HOME</a></li>
+     <li><a href="/childhood.html">Childhood</a></li>
+    <li><a href="/school.html">school life</a></li>
+    <li><a href="/college.html">college life</a></li>
+    <li><a href="/skils.html">skils</a></li>
+    <li><a href="/goals.html">my goals</a></li>
+    <li><a href="/gallery.html">gellery</a></li>
+     <li><a href="/contact.html">Contact</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/login.html">Login</a></li>
   </ul>
 </nav>
 <section id="home">
-  <U><h1>Welcome to Home Page</h1></U>
-</section>
-<section id="about" style="padding:50px;text-align:center;background:black; color:white; height:20px0px;">
-  <h1>@2025 my life website</h1>
-  <p>privacy policy | persional use.</p>
-</section>
+  <div class="hero-slider">
+    <div class="slide active">
+      <img src="./image/n_image.jpg" alt="My Zindagi Image 1">
+    </div>
+    <div class="slide">
+      <img src="images/home2.jpg" alt="My Zindagi Image 2">
+    </div>
+    <div class="slide">
+      <img src="images/home3.jpg" alt="My Zindagi Image 3">
+    </div>
 
+    <div class="overlay"></div>
+
+    <!-- ✨ Text Content -->
+    <div class="hero-text">
+      <h1 class="title-glow">My Zindagi</h1>
+      <h2 class="subtitle">Welcome to My Zindagi</h2>
+      <p>Engineering Student | Tech Enthusiast | Dream Builder</p>
+    </div>
+  </div>
+</section>
+ <footer>
+    &copy; 2025 Kushal Kumar. All rights reserved.
+    <h3> @privacy | tearm policy</h3>
+  </footer>
 <script>
+  
   function toggleMenu() {
     const menu = document.getElementById('menu');
     if(menu.style.display === 'flex'){
