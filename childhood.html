@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>childhood life</title>
+<title>Childhood Life</title>
 <style>
   body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #f4f4f4;
   }
+
   /* Navbar styling */
   nav {
     background: black;
@@ -21,8 +22,10 @@
   .logo {
     font-weight: bold;
     font-size: 20px;
+  }
+  .logo a {
     color: white;
-     
+    text-decoration: none;
   }
   nav ul {
     list-style: none;
@@ -68,182 +71,174 @@
     .menu-btn {
       display: block;
     }
+  }
+
   /* === Background Animation === */
-#childhood {
-  position: relative;
-  background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #121212, #0f0f0f);
-  background-size: 400% 400%;
-  animation: gradientFlow 10s ease infinite;
-  color: #f5f5f5;
-  padding: 100px 20px;
-  overflow: hidden;
-}
-
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* === Overlay Glow === */
-#childhood .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, rgba(0,255,136,0.15), transparent 70%);
-  pointer-events: none;
-  animation: pulseGlow 5s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.8; }
-}
-
-/* === Container === */
-#childhood .container {
-  position: relative;
-  z-index: 2;
-  max-width: 1000px;
-  margin: auto;
-  text-align: center;
-}
-
-/* === Heading === */
-#childhood h2 {
-  font-size: 2.4rem;
-  margin-bottom: 35px;
-  color: #00ff88;
-  text-shadow: 0 0 15px rgba(0,255,136,0.6);
-  letter-spacing: 1px;
-}
-
-/* === Content Layout === */
-.childhood-content {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-}
-
-/* === Text === */
-.childhood-text {
-  flex: 1 1 400px;
-  text-align: left;
-}
-
-.childhood-text p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #d0d0d0;
-  text-shadow: 0 0 10px rgba(0,255,136,0.1);
-}
-
-/* === Slider === */
-.slider-container {
-  flex: 1 1 350px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0,255,136,0.4);
-  border: 2px solid #00ff88;
-}
-
-.slider {
-  display: flex;
-  transition: transform 0.8s ease;
-}
-
-.slider img {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-/* === Buttons === */
-.slider-container button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,255,136,0.3);
-  color: white;
-  border: none;
-  font-size: 2rem;
-  padding: 5px 12px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background 0.3s;
-}
-
-.slider-container button:hover {
-  background: rgba(0,255,136,0.8);
-}
-
-.prev { left: 10px; }
-.next { right: 10px; }
-
-/* === Fade-in Animation === */
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 2s ease forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  #childhood {
+    position: relative;
+    background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #121212, #0f0f0f);
+    background-size: 400% 400%;
+    animation: gradientFlow 10s ease infinite;
+    color: #f5f5f5;
+    padding: 100px 20px;
+    overflow: hidden;
   }
-}
 
-/* === Responsive Design === */
-@media (max-width: 900px) {
-  .childhood-content {
-    flex-direction: column;
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
-  .childhood-text {
+
+  #childhood .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0,255,136,0.15), transparent 70%);
+    pointer-events: none;
+    animation: pulseGlow 5s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+  }
+
+  #childhood .container {
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin: auto;
     text-align: center;
   }
-  .slider-container {
-    width: 100%;
-  }
-  .slider img {
-    height: 240px;
-  }
-}
 
-@media (max-width: 480px) {
   #childhood h2 {
-    font-size: 1.8rem;
-  }
-  .childhood-text p {
-    font-size: 1rem;
-  }
-  .slider img {
-    height: 200px;
-  }
-}
+    font-size: 2.4rem;
+    margin-bottom: 35px;
+    color: #00ff88;
+    text-shadow: 0 0 15px rgba(0,255,136,0.6);
+    letter-spacing: 1px;
   }
 
+  .childhood-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .childhood-text {
+    flex: 1 1 400px;
+    text-align: left;
+  }
+
+  .childhood-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #d0d0d0;
+    text-shadow: 0 0 10px rgba(0,255,136,0.1);
+  }
+
+  .slider-container {
+    flex: 1 1 350px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,255,136,0.4);
+    border: 2px solid #00ff88;
+  }
+
+  .slider {
+    display: flex;
+    transition: transform 0.8s ease;
+  }
+
+  .slider img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+
+  .slider-container button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,255,136,0.3);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 5px 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s;
+  }
+
+  .slider-container button:hover {
+    background: rgba(0,255,136,0.8);
+  }
+
+  .prev { left: 10px; }
+  .next { right: 10px; }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 2s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .childhood-content {
+      flex-direction: column;
+    }
+    .childhood-text {
+      text-align: center;
+    }
+    .slider-container {
+      width: 100%;
+    }
+    .slider img {
+      height: 240px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #childhood h2 {
+      font-size: 1.8rem;
+    }
+    .childhood-text p {
+      font-size: 1rem;
+    }
+    .slider img {
+      height: 200px;
+    }
+  }
 </style>
 </head>
 <body>
+
 <nav>
- <div class="logo"><a href="./index.html">MyWebsite</a></div>
+  <div class="logo"><a href="./index.html">MyWebsite</a></div>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
   <ul id="menu">
-     <li><a href="./index.html">HOME</a></li>
-     <li><a href="./childhood.html">Childhood</a></li>
-    <li><a href="./school.html">school life</a></li>
-    <li><a href="./collage.html">college life</a></li>
-    <li><a href="./skils.html">skils</a></li>
-    <li><a href="./goals.html">my goals</a></li>
-    <li><a href="./gallery.html">gellery</a></li>
-     <li><a href="./contact.html">Contact</a></li>
+    <li><a href="./index.html">HOME</a></li>
+    <li><a href="./childhood.html">Childhood</a></li>
+    <li><a href="./school.html">School Life</a></li>
+    <li><a href="./collage.html">College Life</a></li>
+    <li><a href="./skils.html">Skills</a></li>
+    <li><a href="./goals.html">My Goals</a></li>
+    <li><a href="./gallery.html">Gallery</a></li>
+    <li><a href="./contact.html">Contact</a></li>
     <li><a href="./about.html">About</a></li>
     <li><a href="./login.html">Login</a></li>
   </ul>
@@ -266,10 +261,10 @@
 
       <div class="slider-container">
         <div class="slider">
-          <img src="images/pic1.jpg" alt="Childhood Memory 1">
-          <img src="images/pic2.jpg" alt="Childhood Memory 2">
-          <img src="images/pic3.jpg" alt="Childhood Memory 3">
-          <img src="images/pic4.jpg" alt="Childhood Memory 4">
+          <img src="https://www.ford.com/acslibs/content/dam/na/ford/en_us/images/mustang/2026/jellybeans/26_frd_mst_dkhrp_crgr_ps34_v1.png" alt="Childhood Memory 1">
+          <img src="https://www.mustangmotorsport.com.au/cdn/shop/files/2024-Mustang-RTR-Spec-2-4.jpg?v=1684976136&width=2048" alt="Childhood Memory 2">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEopnFrh_qvHq0e3z8blmVLMuoH59rFLinEw&s" alt="Childhood Memory 3">
+          <img src="https://www.ford.com/acslibs/content/dam/na/ford/en_us/images/mustang/2026/jellybeans/25_frd_mst_gt_molt_ps34_v1.png" alt="Childhood Memory 4">
         </div>
         <button class="prev">&#10094;</button>
         <button class="next">&#10095;</button>
@@ -277,20 +272,37 @@
     </div>
   </div>
 </section>
-<section id="about" style="padding:50px;text-align:center;background:black; color:white; height:20px0px;">
-  <h1>@2025 my life website</h1>
-  <p>privacy policy | persional use.</p>
+
+<section id="about" style="padding:50px;text-align:center;background:black; color:white;">
+  <h1>@2025 My Life Website</h1>
+  <p>Privacy Policy | Personal Use</p>
 </section>
 
 <script>
+  // Mobile menu toggle
   function toggleMenu() {
     const menu = document.getElementById('menu');
-    if(menu.style.display === 'flex'){
-      menu.style.display = 'none';
-    } else {
-      menu.style.display = 'flex';
-    }
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
   }
+
+  // ===== Slider Script =====
+  const slider = document.querySelector('.slider');
+  const slides = document.querySelectorAll('.slider img');
+  const nextBtn = document.querySelector('.next');
+  const prevBtn = document.querySelector('.prev');
+
+  let index = 0;
+
+  function showSlide(i) {
+    index = (i + slides.length) % slides.length;
+    slider.style.transform = `translateX(${-index * 100}%)`;
+  }
+
+  nextBtn.addEventListener('click', () => showSlide(index + 1));
+  prevBtn.addEventListener('click', () => showSlide(index - 1));
+
+  // Auto Slide Every 4s
+  setInterval(() => showSlide(index + 1), 4000);
 </script>
 
 </body>
