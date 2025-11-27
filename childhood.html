@@ -284,13 +284,10 @@
 </section>
 
 <script>
-  // Mobile menu toggle
   function toggleMenu() {
     const menu = document.getElementById('menu');
     menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
   }
-
-  // ===== Slider Script =====
   const slider = document.querySelector('.slider');
   const slides = document.querySelectorAll('.slider img');
   const nextBtn = document.querySelector('.next');
@@ -304,9 +301,7 @@
   }
 
   nextBtn.addEventListener('click', () => showSlide(index + 1));
-  prevBtn.addEventListener('click', () => showSlide(index - 1));
-
-  // Auto Slide Every 4s
+  prevBtn.addEventListener('click', () => showSlide(index - 1))
   setInterval(() => showSlide(index + 1), 4000);
 </script>
 
