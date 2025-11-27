@@ -142,6 +142,7 @@
     text-shadow: 0 0 10px rgba(0,255,136,0.1);
   }
 
+  /* === Slider Section === */
   .slider-container {
     flex: 1 1 350px;
     position: relative;
@@ -153,16 +154,19 @@
 
   .slider {
     display: flex;
-    transition: transform 0.8s ease;
+    width: 100%;
+    transition: transform 0.8s ease-in-out;
   }
 
   .slider img {
+    flex-shrink: 0;
     width: 100%;
     height: 320px;
     object-fit: cover;
     border-radius: 15px;
   }
 
+  /* === Buttons === */
   .slider-container button {
     position: absolute;
     top: 50%;
@@ -175,6 +179,7 @@
     cursor: pointer;
     border-radius: 50%;
     transition: background 0.3s;
+    z-index: 3;
   }
 
   .slider-container button:hover {
@@ -261,10 +266,10 @@
 
       <div class="slider-container">
         <div class="slider">
-          <img src="https://www.ford.com/acslibs/content/dam/na/ford/en_us/images/mustang/2026/jellybeans/26_frd_mst_dkhrp_crgr_ps34_v1.png" alt="Childhood Memory 1">
-          <img src="https://www.mustangmotorsport.com.au/cdn/shop/files/2024-Mustang-RTR-Spec-2-4.jpg?v=1684976136&width=2048" alt="Childhood Memory 2">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEopnFrh_qvHq0e3z8blmVLMuoH59rFLinEw&s" alt="Childhood Memory 3">
-          <img src="https://www.ford.com/acslibs/content/dam/na/ford/en_us/images/mustang/2026/jellybeans/25_frd_mst_gt_molt_ps34_v1.png" alt="Childhood Memory 4">
+          <img src="./Images/childhood1.jpg" alt="Childhood Memory 1">
+          <img src="./Images/childhood2.jpg" alt="Childhood Memory 2">
+          <img src="./Images/childhood3.jpg" alt="Childhood Memory 3">
+          <img src="./Images/childhood.jpg" alt="Childhood Memory 4">
         </div>
         <button class="prev">&#10094;</button>
         <button class="next">&#10095;</button>
