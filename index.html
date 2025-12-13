@@ -10,13 +10,13 @@
     font-family: Arial, sans-serif;
     background: #f4f4f4;
   }
-   footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #1E1E1E;
-      color: #555;
-      font-size: 14px;
-    }
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1E1E1E;
+    color: #555;
+    font-size: 14px;
+  }
   nav {
     background: black;
     display: flex;
@@ -28,17 +28,15 @@
     font-weight: bold;
     font-size: 20px;
     color: white;
-     
   }
+  .logo a { color:#fff; text-decoration:none; }
   nav ul {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
   }
-  nav ul li {
-    margin-left: 20px;
-  }
+  nav ul li { margin-left: 20px; }
   nav ul li a {
     color: white;
     text-decoration: none;
@@ -46,11 +44,8 @@
     padding: 6px 10px;
     border-radius: 5px;
   }
-  nav ul li a:hover {
-    background: rgba(255,255,255,0.2);
-  }
+  nav ul li a:hover { background: rgba(255,255,255,0.2); }
 
-  /* Responsive toggle */
   .menu-btn {
     display: none;
     font-size: 24px;
@@ -65,141 +60,105 @@
       display: none;
       flex-direction: column;
       width: 100%;
-      height: auto; 
+      height: auto;
+      background:#000;
     }
-    nav ul li {
-      margin: 10px 0;
-      text-align: center;
-    }
-    .menu-btn {
-      display: block;
-    }
+    nav ul li { margin: 10px 0; text-align: center; }
+    .menu-btn { display: block; }
   }
+
   /* === Home Section === */
-#home {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-}
+  #home {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+  .hero-slider {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
 
-/* === Slider Wrapper === */
-.hero-slider {
-  position: relative;
-  height: 100%;
-  width: 100%;
-}
-
-/* === Each Slide === */
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
-}
-
-.slide.active {
-  opacity: 1;
-  z-index: 1;
-}
-
-/* === Slide Images === */
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.7);
-}
-
-/* === Overlay === */
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
-  z-index: 2;
-}
-
-/* === Hero Text === */
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  text-align: center;
-  color: #fff;
-  text-shadow: 0 0 15px rgba(0,255,136,0.6);
-  animation: fadeUp 2s ease forwards;
-}
-
-/* === Main Title === */
-.hero-text .title-glow {
-  font-size: 4rem;
-  margin-bottom: 10px;
-  color: #00ff88;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  animation: glowPulse 2s infinite alternate;
-}
-
-/* === Subtitle === */
-.hero-text .subtitle {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-  color: #fff;
-  letter-spacing: 1px;
-}
-
-/* === Description === */
-.hero-text p {
-  font-size: 1.2rem;
-  color: #f0f0f0;
-  letter-spacing: 1px;
-}
-
-/* === Animations === */
-@keyframes fadeUp {
-  from {
+  /* === Each Slide === */
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     opacity: 0;
-    transform: translate(-50%, -40%);
+    transition: opacity 1.5s ease-in-out;
   }
-  to {
+  .slide.active {
     opacity: 1;
+    z-index: 1;
+  }
+
+  /* === Slide Images === */
+  .slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+  }
+
+  /* === Overlay === */
+  .overlay {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+    z-index: 2;
+    pointer-events:none;
+  }
+
+  /* === Hero Text === */
+  .hero-text {
+    position: absolute;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 3;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(0,255,136,0.6);
+    animation: fadeUp 2s ease forwards;
   }
-}
-
-@keyframes glowPulse {
-  from {
-    text-shadow: 0 0 15px rgba(0,255,136,0.5);
-  }
-  to {
-    text-shadow: 0 0 30px rgba(0,255,136,1), 0 0 50px rgba(0,255,136,0.8);
-  }
-}
-
-/* === Responsive Design === */
-@media (max-width: 768px) {
   .hero-text .title-glow {
-    font-size: 2.5rem;
+    font-size: 4rem;
+    margin-bottom: 10px;
+    color: #00ff88;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: glowPulse 2s infinite alternate;
   }
   .hero-text .subtitle {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+    letter-spacing: 1px;
   }
   .hero-text p {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    color: #f0f0f0;
+    letter-spacing: 1px;
   }
-}
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translate(-50%, -40%); }
+    to   { opacity: 1; transform: translate(-50%, -50%); }
+  }
+  @keyframes glowPulse {
+    from { text-shadow: 0 0 15px rgba(0,255,136,0.5); }
+    to   { text-shadow: 0 0 30px rgba(0,255,136,1), 0 0 50px rgba(0,255,136,0.8); }
+  }
+
+  /* === Responsive Design === */
+  @media (max-width: 768px) {
+    .hero-text .title-glow { font-size: 2.5rem; }
+    .hero-text .subtitle { font-size: 1.2rem; }
+    .hero-text p { font-size: 1rem; }
+  }
 </style>
 </head>
 <body>
-<nav>
+  <nav>
     <div class="logo"><a href="./index.html">Myzindagi</a></div>
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
     <ul id="menu">
@@ -216,44 +175,102 @@
     </ul>
   </nav>
 
-<section id="home">
-  <div class="hero-slider">
-    <div class="slide active">
-      <img src="./Images/n_image.jpg" alt="My Zindagi Image 1">
-    </div>
-    <div class="slide">
-      <img src="./Images/home.jpg" alt="My Zindagi Image 2">
-    </div>
-    <div class="slide">
-      <img src="./Images/home2.jpg" alt="My Zindagi Image 3">
-    </div>
+  <section id="home">
+    <div class="hero-slider" id="slider">
+      <div class="slide active">
+        <img src="./Images/n_image.jpg" alt="My Zindagi Image 1">
+      </div>
+      <div class="slide">
+        <img src="./Images/home.jpg" alt="My Zindagi Image 2">
+      </div>
+      <div class="slide">
+        <img src="./Images/home2.jpg" alt="My Zindagi Image 3">
+      </div>
 
-    <div class="overlay"></div>
+      <div class="overlay"></div>
 
-    <!-- ✨ Text Content -->
-    <div class="hero-text">
-      <h1 class="title-glow">My Zindagi</h1>
-      <h2 class="subtitle">Welcome to My Zindagi</h2>
-      <p>Engineering Student | Tech Enthusiast | Dream Builder</p>
+      <div class="hero-text">
+        <h1 class="title-glow">My Zindagi</h1>
+        <h2 class="subtitle">Welcome to My Zindagi</h2>
+        <p>Engineering Student | Tech Enthusiast | Dream Builder</p>
+      </div>
     </div>
-  </div>
-</section>
- <footer>
+  </section>
+
+  <footer>
     &copy; 2025 Kushal Kumar. All rights reserved.
-    <h3> @privacy | tearm policy</h3>
+    <h3>@privacy | tearm policy</h3>
   </footer>
+
 <script>
-  
+  // ===== Menu toggle (safer) =====
   function toggleMenu() {
     const menu = document.getElementById('menu');
-    if(menu.style.display === 'flex'){
-      menu.style.display = 'none';
-    } else {
-      menu.style.display = 'flex';
-    }
+    const isShown = getComputedStyle(menu).display !== 'none';
+    menu.style.display = isShown ? 'none' : 'flex';
   }
-   alert("welcome to my zindagi");
-   console.log("welcome to my zindagi");
+  console.log("welcome to my zindagi");
+
+  // ===== Slider =====
+  const slider = document.getElementById('slider');
+  const slides = Array.from(slider.querySelectorAll('.slide'));
+
+  if (slides.length > 0) {
+    let current = 0;
+    const INTERVAL_MS = 1500; // speed
+    let timer = null;
+
+    function setActive(i){
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+      current = i;
+    }
+    function next(){
+      const n = (current + 1) % slides.length;
+      setActive(n);
+    }
+    function prev(){
+      const p = (current - 1 + slides.length) % slides.length;
+      setActive(p);
+    }
+
+    function startAuto(){
+      stopAuto();
+      timer = setInterval(next, INTERVAL_MS);
+    }
+    function stopAuto(){
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+  
+    setActive(0);
+    startAuto();
+
+    
+    slider.addEventListener('mouseenter', stopAuto);
+    slider.addEventListener('mouseleave', startAuto);
+
+    let startX = null;
+    slider.addEventListener('touchstart', e => {
+      startX = e.changedTouches[0].clientX;
+      stopAuto();
+    }, {passive:true});
+    slider.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (dx > 40) prev();
+      else if (dx < -40) next();
+      startAuto();
+    }, {passive:true});
+
+    slides.forEach((s, i) => {
+      const img = s.querySelector('img');
+      img.addEventListener('error', () => {
+        console.warn(`Slide ${i+1} image not found:`, img.getAttribute('src'));
+      });
+    });
+  } else {
+    console.warn('No slides found');
+  }
 </script>
 
 </body>
