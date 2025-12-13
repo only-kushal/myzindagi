@@ -100,6 +100,180 @@
     }
   }
 </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Kushal</title>
+  <style>
+    :root{
+      --bg:#0f1115;--card:#151822;--text:#e7e9ee;--muted:#b7bdc9;--brand:#7c5cff;--ring:#7c5cff55;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);}
+
+    /* Navbar */
+    nav{position:sticky;top:0;z-index:10;background:rgba(15,17,21,.7);backdrop-filter: blur(10px);border-bottom:1px solid #222;}
+    .nav-wrap{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
+    .brand{font-weight:700;letter-spacing:.3px}
+    .nav-links{display:flex;gap:14px}
+    .nav-links a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:10px}
+    .nav-links a[aria-current="page"],.nav-links a:hover{background:var(--card);color:var(--text)}
+
+    /* Header */
+    .header{max-width:1100px;margin:24px auto 8px;padding:0 16px}
+    .header h1{margin:0 0 6px;font-size:clamp(24px,3.2vw,36px)}
+    .header p{margin:0;color:var(--muted)}
+
+    /* Filters */
+    .filters{max-width:1100px;margin:14px auto;padding:0 16px;display:flex;gap:10px;flex-wrap:wrap}
+    .filter-btn{border:1px solid #2a2f3b;background:#12151c;color:var(--muted);padding:8px 12px;border-radius:999px;cursor:pointer;transition:transform .12s ease, background .2s, color .2s, border .2s;}
+    .filter-btn:hover{transform:translateY(-1px)}
+    .filter-btn[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:white;box-shadow:0 0 0 6px var(--ring)}
+
+    /* Gallery grid */
+    .gallery{max-width:1100px;margin:10px auto 40px;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .card{background:var(--card);border:1px solid #262a36;border-radius:16px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.25);transition:transform .18s ease, box-shadow .18s ease, opacity .2s ease}
+    .card.hidden{opacity:0;transform:scale(.98);pointer-events:none}
+    .thumb{display:block;width:100%;height:200px;object-fit:cover;background:#0b0d12}
+    .meta{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .badge{font-size:12px;padding:4px 8px;border-radius:999px;background:#1d2130;border:1px solid #2d3345;color:#aeb5c7}
+
+    /* Footer */
+    footer{border-top:1px solid #222;margin-top:20px}
+    .footer-wrap{max-width:1100px;margin:0 auto;padding:18px 16px;color:#9aa1b3;font-size:14px;text-align:center}
+
+    /* Responsive tweaks */
+    @media (min-width:800px){ .thumb{height:240px} }
+  </style>
+</head>
+<body>
+
+  <!-- FILTER BUTTONS -->
+  <div class="filters" role="toolbar" aria-label="Gallery filters">
+    <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+    <button class="filter-btn" data-filter="projects">Projects</button>
+    <button class="filter-btn" data-filter="design">Design</button>
+    <button class="filter-btn" data-filter="photography">Photography</button>
+    <button class="filter-btn" data-filter="travel">Travel</button>
+  </div>
+
+  <!-- GALLERY GRID -->
+  <main class="gallery" id="gallery" aria-live="polite"></main>
+
+  <footer>
+    <div class="footer-wrap">© 2025 Kushal Kumar · All rights reserved</div>
+  </footer>
+
+  <script>
+    /* ===============================
+       CONFIG: Add your images here
+       Keep your images inside folders like:
+       - images/projects/
+       - images/design/
+       - images/photography/
+       - images/travel/
+       You can rename or add new categories freely.
+    =================================*/
+    const images = [
+      // { src: "folder/file.ext", title: "optional title", category: "category" }
+      { src: "gallery_images/photo1.jpg",  title: "",     category: "design" },
+      { src: "gallery_images/photo2.jpg",  title: "",   category: "projects" },
+      { src: "gallery_images/photo3.jpg",  title: "Street Portrait",  category: "photography" },
+      { src: "gallery_images/photo4.jpg",  title: "Hills Trip",       category: "travel" },
+      { src: "gallery_images/photo5.jpg",  title: "Portfolio Mockup", category: "design" },
+      { src: "gallery_images/photo6.jpg",  title: "IoT Prototype",    category: "projects" },
+      { src: "gallery_images/photo7.jpg",  title: "City Night",       category: "photography" },
+      { src: "gallery_images/photo8.jpg",  title: "Beach Day",        category: "travel" },
+      { src: "gallery_images/photo9.jpg",  title: "App UI",           category: "design" },
+      { src: "gallery_images/photo10.jpg", title: "BLDC Test Rig",    category: "projects" },
+    ];
+
+    /* ============ Render cards from the array ============ */
+    const galleryEl = document.getElementById('gallery');
+
+    function createCard({src, title = '', category}){
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.setAttribute('data-category', category);
+      card.setAttribute('tabindex', '0');
+
+      const img = document.createElement('img');
+      img.className = 'thumb';
+      img.loading = 'lazy'; // native lazy-load
+      img.src = src;
+      img.alt = title || category;
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      const cap = document.createElement('span');
+      cap.textContent = title || '\u00A0';
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+
+      meta.appendChild(cap);
+      meta.appendChild(badge);
+      card.appendChild(img);
+      card.appendChild(meta);
+      return card;
+    }
+
+    function render(all = images){
+      galleryEl.innerHTML = '';
+      const frag = document.createDocumentFragment();
+      all.forEach(item => frag.appendChild(createCard(item)));
+      galleryEl.appendChild(frag);
+    }
+
+    render();
+
+    /* ============ Filtering logic ============ */
+    const buttons = document.querySelectorAll('.filter-btn');
+
+    function setActive(btn){
+      buttons.forEach(b => b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+    }
+
+    function filterBy(cat){
+      if(cat === 'all'){ render(images); return; }
+      const filtered = images.filter(it => it.category === cat);
+      render(filtered);
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.filter;
+        setActive(btn);
+        filterBy(cat);
+      });
+      // keyboard support
+      btn.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          btn.click();
+        }
+      });
+    });
+
+    /* ============ Small polish: maintain scroll position on re-render ============ */
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.remove('hidden'); }
+      });
+    },{ threshold: 0.2 });
+
+    const oldRender = render;
+    render = function(list){
+      oldRender(list);
+      // animate in
+      document.querySelectorAll('.card').forEach(c=>{
+        c.classList.add('hidden');
+        observer.observe(c);
+        setTimeout(()=>c.classList.remove('hidden'), 0);
+      });
+    }
+  </script>
 
 </body>
 </html>
