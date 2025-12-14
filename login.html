@@ -1,157 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
   <title>Login / Register</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: #f0f0f0;
+    :root{
+      --bg:#121212;
+      --panel:#1a7d6e;     /* container bg */
+      --ink:#f0f0f0;
+      --muted:#9aa0a6;
+      --border:#2a2a2a;
+      --primary:#2575fc;
+      --primary-2:#6a11cb;
+      --nav-h:60px;
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      -webkit-tap-highlight-color: transparent;
+      scroll-padding-top: var(--nav-h);
     }
 
-    nav {
-      background: black;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+    /* ===== NAV ===== */
+    nav{
+      position:sticky; top:0; z-index:1000;
+      height:var(--nav-h);
+      background:#000;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 16px;
+      border-bottom:1px solid #191919;
     }
-    nav .logo a {
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-      text-decoration: none;
+    .logo a{
+      color:#fff; text-decoration:none; font-weight:700; font-size:18px;
     }
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-      transition: all .3s ease;
+    .menu-btn{
+      display:none; appearance:none;
+      background:none; border:none; color:#fff; font-size:28px; cursor:pointer; line-height:1;
     }
-    nav ul li {
-      margin-left: 20px;
+    nav ul{
+      list-style:none; display:flex; gap:14px; margin:0; padding:0;
     }
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      padding: 6px 10px;
-      border-radius: 5px;
+    nav ul a{
+      color:#fff; text-decoration:none; font-weight:600; padding:6px 10px; border-radius:8px;
     }
-    nav ul li a:hover {
-      background: rgba(255,255,255,0.2);
-    }
+    nav ul a:hover{ background:rgba(255,255,255,.18); }
 
-    .menu-btn {
-      display: none;
-      font-size: 28px;
-      color: white;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* MOBILE MENU */
-    @media (max-width: 700px) {
-      nav ul {
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: #222;
-        flex-direction: column;
-        display: none;
+    /* Mobile nav */
+    @media (max-width:700px){
+      .menu-btn{ display:block; }
+      nav ul{
+        position:absolute; left:0; right:0; top:var(--nav-h);
+        flex-direction:column; align-items:center;
+        background:#181818; border-bottom:1px solid #242424;
+        display:none; padding:10px 0;
       }
-      nav ul.show {
-        display: flex;
-      }
-      nav ul li {
-        margin: 12px 0;
-        text-align: center;
-      }
-      .menu-btn {
-        display: block;
-      }
+      nav ul.show{ display:flex; }
+      nav ul li{ width:100%; text-align:center; padding:6px 0; }
     }
 
-    /* FORM CONTAINER */
-    .container {
-      background: rgb(26, 125, 110);
-      width: 350px;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0px 6px 20px rgba(0,0,0,0.3);
-      margin: 50px auto;
-      transition: all .3s ease;
+    /* ===== PAGE LAYOUT ===== */
+    .page{
+      min-height:calc(100dvh - var(--nav-h));
+      display:grid; place-items:center;
+      padding:clamp(16px, 3vw, 32px);
     }
 
-    @media (max-width: 400px) {
-      .container {
-        width: 90%;
-        padding: 20px;
-      }
+    /* ===== AUTH CARD ===== */
+    .container{
+      background:var(--panel);
+      width:min(420px, 92vw);
+      padding:clamp(18px, 4vw, 28px);
+      border-radius:var(--radius);
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    h2{
+      margin:0 0 14px;
+      text-align:center;
+      font-size:clamp(20px, 2.4vw, 26px);
+      color:#fff;
     }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #fff;
+    .form{ display:none; }
+    .form.active{ display:block; }
+
+    label{
+      display:block; font-size:14px; color:#e8f4ff; margin-top:10px; margin-bottom:6px;
+    }
+    input{
+      width:100%;
+      padding:14px 12px;
+      border:1px solid var(--border);
+      background:#1e1e1e;
+      color:var(--ink);
+      border-radius:10px;
+      font-size:16px;
+      outline:none;
+      transition:border-color .2s, box-shadow .2s;
+    }
+    input::placeholder{ color:#7d8590; }
+    input:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(37,117,252,.25);
     }
 
-    .form { display: none; }
-    .form.active { display: block; }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
+    button{
+      width:100%;
+      padding:14px;
+      margin-top:12px;
+      border:none; border-radius:10px;
+      background:var(--primary);
+      color:#fff; font-size:18px; font-weight:600;
+      cursor:pointer; transition:background .2s, transform .05s;
+    }
+    button:hover{ background:var(--primary-2); }
+    button:active{ transform:translateY(1px); }
+    .actions{
+      display:flex; gap:10px; flex-direction:column;
     }
 
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: #2575fc;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-      transition: .3s;
+    .link{
+      text-align:center; margin-top:12px;
+      font-size:14px; color:#fff;
     }
-    button:hover {
-      background: #6a11cb;
-    }
+    .link a{ color:#fff; font-weight:700; text-decoration:none; }
+    .link a:hover{ text-decoration:underline; }
 
-    .link {
-      text-align: center;
-      margin-top: 12px;
-    }
-    .link a {
-      color: black;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .link a:hover {
-      text-decoration: underline;
+    /* Very small height devices (landscape phones) */
+    @media (max-height:520px){
+      .page{ align-items:start; }
+      .container{ margin-top:12px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAV -->
   <nav>
     <div class="logo"><a href="./index.html">Myzindagi</a></div>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu" aria-expanded="false">☰</button>
     <ul id="menu">
       <li><a href="./index.html">HOME</a></li>
       <li><a href="./childhood.html">Childhood</a></li>
@@ -166,50 +161,84 @@
     </ul>
   </nav>
 
-  <div class="container">
-    <div class="form active" id="loginForm">
-      <h2>Login</h2>
-      <input type="text" placeholder="Username" required>
-      <input type="password" placeholder="Password" required>
-      <button>Login</button>
-      <div class="link">
-        <a href="#" onclick="showForm('registerForm')">New User? Register</a><br>
-        <a href="#" onclick="showForm('forgotForm')">Forgot Password?</a>
-      </div>
-    </div>
+  <!-- PAGE -->
+  <div class="page">
+    <div class="container">
 
-    <div class="form" id="registerForm">
-      <h2>Register</h2>
-      <input type="text" placeholder="Full Name" required>
-      <input type="email" placeholder="Email" required>
-      <input type="text" placeholder="Username" required>
-      <input type="password" placeholder="Password" required>
-      <button>Register</button>
-      <div class="link">
-        <a href="#" onclick="showForm('loginForm')">Already have an account? Login</a>
-      </div>
-    </div>
+      <!-- LOGIN -->
+      <form class="form active" id="loginForm" onsubmit="return false;">
+        <h2>Login</h2>
+        <label for="lu">Username</label>
+        <input id="lu" type="text" placeholder="Enter username" required />
+        <label for="lp">Password</label>
+        <input id="lp" type="password" placeholder="Enter password" required />
+        <div class="actions">
+          <button type="submit">Login</button>
+        </div>
+        <div class="link">
+          <a href="#" onclick="showForm('registerForm')">New User? Register</a> •
+          <a href="#" onclick="showForm('forgotForm')">Forgot Password?</a>
+        </div>
+      </form>
 
-    <div class="form" id="forgotForm">
-      <h2>Forgot Password</h2>
-      <input type="email" placeholder="Enter your email" required>
-      <button>Reset Password</button>
-      <div class="link">
-        <a href="#" onclick="showForm('loginForm')">Back to Login</a>
-      </div>
+      <!-- REGISTER -->
+      <form class="form" id="registerForm" onsubmit="return false;">
+        <h2>Register</h2>
+        <label for="rf">Full Name</label>
+        <input id="rf" type="text" placeholder="Your full name" required />
+        <label for="re">Email</label>
+        <input id="re" type="email" placeholder="you@example.com" required />
+        <label for="ru">Username</label>
+        <input id="ru" type="text" placeholder="Choose a username" required />
+        <label for="rp">Password</label>
+        <input id="rp" type="password" placeholder="Create a password" required />
+        <button type="submit">Register</button>
+        <div class="link">
+          <a href="#" onclick="showForm('loginForm')">Already have an account? Login</a>
+        </div>
+      </form>
+
+      <!-- FORGOT -->
+      <form class="form" id="forgotForm" onsubmit="return false;">
+        <h2>Forgot Password</h2>
+        <label for="fe">Email</label>
+        <input id="fe" type="email" placeholder="Enter your email" required />
+        <button type="submit">Reset Password</button>
+        <div class="link">
+          <a href="#" onclick="showForm('loginForm')">Back to Login</a>
+        </div>
+      </form>
+
     </div>
   </div>
 
   <script>
-    function showForm(formId) {
-      document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
-      document.getElementById(formId).classList.add('active');
+    // Switch forms
+    function showForm(id){
+      document.querySelectorAll('.form').forEach(f=>f.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      // Scroll to top of card on mobile
+      document.querySelector('.container').scrollIntoView({behavior:'smooth', block:'start'});
     }
 
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.classList.toggle('show');
-    }
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+    menuBtn.addEventListener('click', ()=>{
+      const open = menu.classList.toggle('show');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+
+    // Close menu when a nav link is tapped (mobile)
+    document.querySelectorAll('nav ul a').forEach(a=>{
+      a.addEventListener('click', ()=> menu.classList.remove('show'));
+    });
+
+    // If user rotates / resizes beyond 700px, ensure menu is shown correctly
+    const mql = window.matchMedia('(min-width: 701px)');
+    mql.addEventListener('change', e=>{
+      if(e.matches){ menu.classList.remove('show'); }
+    });
   </script>
 </body>
 </html>

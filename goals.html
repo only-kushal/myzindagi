@@ -88,7 +88,383 @@
     <li><a href="./login.html">Login</a></li>
   </ul>
 </nav>
+<style>
+  :root{
+    --brand:#00ff88;
+    --brand-soft:#14ffa1;
+    --bg:#0f0f10;
+    --panel:#151617;
+    --ink:#e9f0f1;
+    --muted:#9aa0a6;
+    --card:#161a1b;
+    --accent:#2575fc;
+    --accent-2:#6a11cb;
+    --radius:18px;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
 
+  /* ===== Wrapper / Sections ===== */
+  .wrap{max-width:1100px; margin:auto; padding:40px 16px;}
+  .section{margin:28px 0; background:var(--panel); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
+  .section .inner{padding:22px 18px;}
+  .title{
+    font-size:28px; margin:0 0 12px;
+    color:var(--ink);
+    text-shadow:0 0 14px rgba(0,255,136,.45);
+  }
+  .sub{margin:0 0 16px; color:var(--muted)}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; height:48vh; min-height:340px; overflow:hidden;
+    border-radius:0 0 28px 28px;
+    box-shadow:var(--shadow);
+  }
+  .hero img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; filter:brightness(.55) saturate(1.05);
+  }
+  .hero::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.65));
+  }
+  .hero-content{
+    position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:0 16px;
+  }
+  .hero h1{
+    margin:0 0 10px; font-size:42px; letter-spacing:1px; color:var(--brand);
+    text-transform:uppercase;
+    text-shadow:0 0 22px rgba(0,255,136,.6);
+  }
+  .hero p{ margin:0; font-size:18px; color:#eafaf2 }
+
+  @media (max-width:700px){
+    .hero h1{font-size:32px}
+    .hero{min-height:300px}
+  }
+
+  /* ===== Cards grid ===== */
+  .grid3{ display:grid; gap:16px; grid-template-columns:repeat(3,1fr); }
+  .grid2{ display:grid; gap:16px; grid-template-columns:repeat(2,1fr); }
+  .grid4{ display:grid; gap:12px; grid-template-columns:repeat(4,1fr); }
+  @media(max-width:900px){ .grid3{grid-template-columns:repeat(2,1fr)} .grid4{grid-template-columns:repeat(3,1fr)} }
+  @media(max-width:620px){ .grid3,.grid2,.grid4{grid-template-columns:1fr} }
+
+  .card{
+    background:var(--card); border:1px solid #1f2325;
+    border-radius:14px; padding:16px; box-shadow:0 6px 18px rgba(0,0,0,.28);
+  }
+  .card h4{ margin:0 0 6px; color:#e9fffa; font-size:18px }
+  .card p{ margin:0; color:var(--muted); line-height:1.5 }
+
+  /* ===== Timeline ===== */
+  .timeline{ position:relative; padding-left:26px; }
+  .timeline::before{
+    content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:#2a2f33;
+  }
+  .t-item{
+    position:relative; margin:18px 0; background:var(--card);
+    border:1px solid #1f2325; border-radius:14px; padding:14px 16px; box-shadow:0 6px 18px rgba(0,0,0,.28);
+  }
+  .t-item::before{
+    content:""; position:absolute; left:-19px; top:16px; width:12px; height:12px; border-radius:50%;
+    background:var(--brand); box-shadow:0 0 0 3px rgba(0,255,136,.18);
+  }
+  .t-title{ margin:0 0 6px; font-weight:700; }
+
+  /* ===== Progress Bars ===== */
+  .skill{ margin:10px 0 14px; }
+  .skill-label{
+    display:flex; justify-content:space-between; font-size:14px; color:#cfe9df; margin-bottom:6px;
+  }
+  .bar{
+    position:relative; height:12px; border-radius:10px; background:#1e2124; overflow:hidden; border:1px solid #22272a;
+  }
+  .bar > span{
+    position:absolute; left:0; top:0; bottom:0; width:0%;
+    background:linear-gradient(90deg, var(--brand), var(--brand-soft));
+    box-shadow:0 0 18px rgba(0,255,136,.35) inset;
+    transition:width 1.2s ease;
+  }
+
+  /* ===== Quote ===== */
+  .quote{
+    position:relative; padding:20px; border-left:4px solid var(--brand);
+    background:linear-gradient( to right, rgba(0,255,136,.06), transparent);
+    border-radius:12px;
+  }
+
+  /* ===== Table ===== */
+  table{ width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px; }
+  th,td{ padding:12px; border-bottom:1px solid #21262b; text-align:left; }
+  th{ background:#121516; color:#cfe9df; }
+  tr:last-child td{ border-bottom:none; }
+  .status{ font-weight:700 }
+  .done{ color:#00d98b }
+  .prog{ color:#f3c86a }
+  .soon{ color:#6aa6ff }
+
+  /* ===== CTA ===== */
+  .cta{
+    background:linear-gradient(135deg, rgba(37,117,252,.18), rgba(0,255,136,.12));
+    border:1px solid #234; border-radius:16px; padding:18px;
+    display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  }
+  .cta h3{ margin:0; color:#eafff6 }
+  .cta p{ margin:0; color:#cfe9df }
+  .cta .btn{
+    padding:12px 16px; border-radius:12px; border:none;
+    background:var(--accent); color:#fff; font-weight:700; cursor:pointer;
+  }
+  .cta .btn:hover{ background:var(--accent-2) }
+
+  /* ===== Footer ===== */
+  footer{ text-align:center; padding:24px; color:#9fb2a9; }
+</style>
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <img src="./Images/goals/hero.jpg" alt="Sunrise over mountains - aiming high">
+    <div class="hero-content">
+      <div>
+        <h1>My Goals</h1>
+        <p>Every dream begins with a small step — here’s my roadmap for success.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ===== Short-Term Goals ===== -->
+    <section class="section" id="short-term">
+      <div class="inner">
+        <h2 class="title">Short-Term Goals (1–2 Years)</h2>
+        <p class="sub">Abhi ke focus areas — daily consistency + strong fundamentals.</p>
+        <div class="grid3">
+          <div class="card">
+            <h4>✅ Strong CGPA</h4>
+            <p>Diploma/degree me solid performance maintain karna with planned study routine.</p>
+          </div>
+          <div class="card">
+            <h4>💻 Full-Stack Web</h4>
+            <p>HTML, CSS, JS + a framework (React) and backend basics with Node/Express.</p>
+          </div>
+          <div class="card">
+            <h4>🧠 Problem Solving</h4>
+            <p>Regular DSA practice (arrays, strings, recursion, trees, graphs) + contests.</p>
+          </div>
+          <div class="card">
+            <h4>🗣️ Communication</h4>
+            <p>English speaking & presentation skills — weekly practice + mini talks.</p>
+          </div>
+          <div class="card">
+            <h4>📁 Portfolio & Git</h4>
+            <p>Projects showcase, clean READMEs, and consistent Git commit history.</p>
+          </div>
+          <div class="card">
+            <h4>📜 Certifications</h4>
+            <p>NPTEL/Coursera courses in Web/IoT/Cloud for verified learning.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Long-Term Goals ===== -->
+    <section class="section" id="long-term">
+      <div class="inner">
+        <h2 class="title">Long-Term Goals (3–5+ Years)</h2>
+        <p class="sub">Badi soch — career direction aur impact.</p>
+        <div class="grid3">
+          <div class="card">
+            <h4>🚀 Top Tech Placement</h4>
+            <p>Product/service MNC ya fast-growing startup me software engineer role.</p>
+          </div>
+          <div class="card">
+            <h4>🤖 Deep Tech</h4>
+            <p>AI / IoT / EV projects me contribute — real-world problem solving.</p>
+          </div>
+          <div class="card">
+            <h4>🎓 Higher Studies</h4>
+            <p>B.Tech / Degree with strong specialization and research exposure.</p>
+          </div>
+          <div class="card">
+            <h4>💡 Startup Vision</h4>
+            <p>Apna product build karna — small MVP se start, users ke saath iterate.</p>
+          </div>
+          <div class="card">
+            <h4>🌍 Community</h4>
+            <p>Open-source contributions, tech talks, juniors ko mentor karna.</p>
+          </div>
+          <div class="card">
+            <h4>💼 Financial Goals</h4>
+            <p>Emergency fund, skill investments, and smart budgeting discipline.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Career Vision / Dream Role ===== -->
+    <section class="section" id="vision">
+      <div class="inner">
+        <h2 class="title">Career Vision</h2>
+        <div class="grid2">
+          <div class="card">
+            <h4>My Dream Role</h4>
+            <p>To become a skilled Software Engineer building human-centric solutions that are reliable, secure, and scalable.</p>
+          </div>
+          <div class="card">
+            <h4>Impact I Want</h4>
+            <p>Contribute to smart systems (IoT/EV/AI) that save energy, reduce friction, and improve everyday life.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills Roadmap ===== -->
+    <section class="section" id="skills">
+      <div class="inner">
+        <h2 class="title">Skills Roadmap</h2>
+        <p class="sub">Current progress — practice + projects = growth.</p>
+
+        <div class="card">
+          <div class="skill">
+            <div class="skill-label"><span>HTML & CSS</span><span>90%</span></div>
+            <div class="bar"><span style="--w:90%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="skill-label"><span>C Programming</span><span>85%</span></div>
+            <div class="bar"><span style="--w:85%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="skill-label"><span>JavaScript</span><span>75%</span></div>
+            <div class="bar"><span style="--w:75%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="skill-label"><span>IoT Basics</span><span>60%</span></div>
+            <div class="bar"><span style="--w:60%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="skill-label"><span>Communication</span><span>80%</span></div>
+            <div class="bar"><span style="--w:80%"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Future Projects ===== -->
+    <section class="section" id="projects">
+      <div class="inner">
+        <h2 class="title">Future Projects & Ideas</h2>
+        <div class="grid3">
+          <div class="card">
+            <h4>🌐 Portfolio 2.0</h4>
+            <p>Dark/light mode, blog, and CMS — fully dynamic personal site.</p>
+          </div>
+          <div class="card">
+            <h4>⚙️ IoT Smart Home</h4>
+            <p>ESP32 + sensors + mobile app — energy efficient automation.</p>
+          </div>
+          <div class="card">
+            <h4>📱 Android Mini-App</h4>
+            <p>Flutter app for routine tracking and habit building.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Achievements Progress ===== -->
+    <section class="section" id="progress">
+      <div class="inner">
+        <h2 class="title">Achievements Progress</h2>
+        <p class="sub">Kya complete ho gaya, kya chal raha hai, aur kya plan me hai.</p>
+        <div class="card">
+          <div style="overflow:auto;">
+            <table>
+              <thead>
+                <tr><th>Goal</th><th>Status</th><th>Notes</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Learn C Programming</td><td class="status done">Completed ✅</td><td>Practice + mini projects</td></tr>
+                <tr><td>Build Portfolio Website</td><td class="status done">Completed ✅</td><td>“My Zindagi” live</td></tr>
+                <tr><td>Learn IoT Basics</td><td class="status prog">In Progress 🔄</td><td>ESP32 + sensors</td></tr>
+                <tr><td>Internship</td><td class="status soon">Coming Soon 🔜</td><td>Target: Summer</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Inspiration Quote ===== -->
+    <section class="section" id="inspire">
+      <div class="inner">
+        <h2 class="title">Inspiration</h2>
+        <div class="quote">
+          <p style="margin:0; font-size:18px;">
+            “Success doesn’t come overnight. It comes with consistency, patience, and belief in yourself.”
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Timeline Example (Optional) ===== -->
+    <section class="section" id="roadmap">
+      <div class="inner">
+        <h2 class="title">Roadmap</h2>
+        <div class="timeline">
+          <div class="t-item"><h4 class="t-title">Q1: Foundation</h4><p>Revise C/DSA + 2 small projects.</p></div>
+          <div class="t-item"><h4 class="t-title">Q2: Web Dev</h4><p>Build full-stack app; deploy + docs.</p></div>
+          <div class="t-item"><h4 class="t-title">Q3: Intern</h4><p>Industry exposure + team collaboration.</p></div>
+          <div class="t-item"><h4 class="t-title">Q4: Capstone</h4><p>Showcase project + interview prep.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact / CTA ===== -->
+    <section class="section" id="contact">
+      <div class="inner">
+        <div class="cta">
+          <div>
+            <h3>Let’s Connect</h3>
+            <p>If you share the same passion or have an opportunity, I’d love to talk.</p>
+          </div>
+          <button class="btn" onclick="window.location.href='./contact.html'">Contact Me</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2025 Kushal Kumar — My Zindagi. All rights reserved.
+  </footer>
+
+<script>
+  // Animate skill bars when in view
+  const bars = document.querySelectorAll('.bar > span');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const w = el.style.getPropertyValue('--w') || '0%';
+        requestAnimationFrame(()=> el.style.width = w);
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  bars.forEach(b=> io.observe(b));
+</script>
 <script>
   function toggleMenu() {
     const menu = document.getElementById('menu');

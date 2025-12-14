@@ -89,7 +89,637 @@
     <li><a href="./login.html">Login</a></li>
   </ul>
 </nav>
+<style>
+  :root{
+    --brand:#00ff88;
+    --brand-soft:#14ffa1;
+    --bg:#0f0f10;
+    --panel:#151617;
+    --ink:#e9f0f1;
+    --muted:#9aa0a6;
+    --card:#161a1b;
+    --accent:#2575fc;
+    --accent-2:#6a11cb;
+    --radius:18px;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none}
 
+  .wrap{max-width:1100px;margin:auto;padding:40px 16px;}
+  .section{margin:28px 0;background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .inner{padding:22px 18px;}
+  .title{
+    font-size:28px;margin:0 0 12px;color:var(--ink);
+    text-shadow:0 0 14px rgba(0,255,136,.45);
+  }
+  .sub{margin:0 0 16px;color:var(--muted)}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;height:44vh;min-height:320px;overflow:hidden;
+    border-radius:0 0 28px 28px;box-shadow:var(--shadow);
+  }
+  .hero img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(1.05);
+  }
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.25),rgba(0,0,0,.65))}
+  .hero-content{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:0 16px}
+  .hero h1{
+    margin:0 0 10px;font-size:40px;color:var(--brand);text-transform:uppercase;
+    text-shadow:0 0 22px rgba(0,255,136,.6);
+  }
+  .hero p{margin:0;color:#eafaf2}
+  @media (max-width:700px){ .hero h1{font-size:30px} }
+
+  /* ===== FILTERS ===== */
+  .filters{
+    display:flex; gap:10px; flex-wrap:wrap;
+    background:linear-gradient(135deg, rgba(0,255,136,.08), rgba(37,117,252,.08));
+    border:1px solid #20342e; border-radius:14px; padding:12px;
+  }
+  .chip{
+    padding:8px 12px; border:1px solid #2b3b36; border-radius:999px; cursor:pointer;
+    background:#111415; color:#cfe9df; font-weight:600; font-size:14px;
+    transition:.2s;
+  }
+  .chip.active{ background:rgba(0,255,136,.14); border-color:rgba(0,255,136,.38); color:#d9fff0; }
+
+  /* ===== GRID ===== */
+  .grid3{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+  @media(max-width:900px){ .grid3{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:620px){ .grid3{grid-template-columns:1fr} }
+
+  .card{
+    background:var(--card);border:1px solid #1f2325;border-radius:14px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.28);
+  }
+  .card h4{margin:0 0 6px;color:#e9fffa}
+  .card p{margin:0;color:var(--muted)}
+  .badge{
+    display:inline-block; margin:8px 6px 0 0; padding:6px 10px; border-radius:999px;
+    background:rgba(0,255,136,.1); border:1px solid rgba(0,255,136,.25); color:#caffef; font-size:12px;
+  }
+
+  /* ===== PROGRESS BARS ===== */
+  .skill{ margin:10px 0 12px; }
+  .skill-label{
+    display:flex; justify-content:space-between; font-size:14px; color:#cfe9df; margin-bottom:6px;
+  }
+  .bar{
+    position:relative; height:12px; border-radius:10px; background:#1e2124; overflow:hidden; border:1px solid #22272a;
+  }
+  .bar > span{
+    position:absolute; left:0; top:0; bottom:0; width:0%;
+    background:linear-gradient(90deg, var(--brand), var(--brand-soft));
+    box-shadow:0 0 18px rgba(0,255,136,.35) inset;
+    transition:width 1.2s ease;
+  }
+
+  /* ===== MATRIX TABLE ===== */
+  .table-wrap{overflow:auto}
+  table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
+  th,td{padding:12px;border-bottom:1px solid #21262b;text-align:left}
+  th{background:#121516;color:#cfe9df}
+  tr:last-child td{border-bottom:none}
+  .lvl{font-weight:700}
+  .b{color:#90ee90} .i{color:#ffe28c} .a{color:#ff9e9e}
+
+  /* ===== TIMELINE ===== */
+  .timeline{ position:relative; padding-left:26px; }
+  .timeline::before{ content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:#2a2f33; }
+  .t-item{
+    position:relative; margin:18px 0; background:var(--card);
+    border:1px solid #1f2325; border-radius:14px; padding:14px 16px; box-shadow:0 6px 18px rgba(0,0,0,.28);
+  }
+  .t-item::before{
+    content:""; position:absolute; left:-19px; top:16px; width:12px; height:12px; border-radius:50%;
+    background:var(--brand); box-shadow:0 0 0 3px rgba(0,255,136,.18);
+  }
+  .t-title{ margin:0 0 6px; font-weight:700; }
+
+  /* ===== CTA ===== */
+  .cta{
+    background:linear-gradient(135deg, rgba(37,117,252,.18), rgba(0,255,136,.12));
+    border:1px solid #234; border-radius:16px; padding:18px;
+    display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  }
+  .cta .btn{
+    padding:12px 16px; border-radius:12px; border:none;
+    background:var(--accent); color:#fff; font-weight:700; cursor:pointer;
+  }
+  .cta .btn:hover{ background:var(--accent-2) }
+
+  footer{text-align:center;padding:24px;color:#9fb2a9}
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <img src="./Images/skils/hero.jpg" alt="Skills banner">
+    <div class="hero-content">
+      <div>
+        <h1>My Skills</h1>
+        <p>Projects + Practice + Patience = Progress. Here’s my tech stack & growth plan.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- FILTERS -->
+    <section class="section" id="filters">
+      <div class="inner">
+        <h2 class="title">Filter by Category</h2>
+        <p class="sub">Tap a chip to filter skills. Tap again to show all.</p>
+        <div class="filters" id="filterChips">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="frontend">Frontend</button>
+          <button class="chip" data-filter="backend">Backend</button>
+          <button class="chip" data-filter="core">Core CS</button>
+          <button class="chip" data-filter="tools">Tools</button>
+          <button class="chip" data-filter="soft">Soft Skills</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILL CARDS -->
+    <section class="section" id="cards">
+      <div class="inner">
+        <h2 class="title">Skill Cards</h2>
+        <div class="grid3" id="skillGrid">
+          <!-- Frontend -->
+          <article class="card skill-card" data-cat="frontend">
+            <h4>Frontend</h4>
+            <p>Responsive UI, accessibility, and clean component design.</p>
+            <span class="badge">HTML5</span><span class="badge">CSS3</span><span class="badge">JavaScript</span><span class="badge">Responsive</span>
+            <div class="skill">
+              <div class="skill-label"><span>HTML & CSS</span><span>90%</span></div>
+              <div class="bar"><span style="--w:90%"></span></div>
+            </div>
+            <div class="skill">
+              <div class="skill-label"><span>JavaScript</span><span>75%</span></div>
+              <div class="bar"><span style="--w:75%"></span></div>
+            </div>
+          </article>
+
+          <!-- Backend -->
+          <article class="card skill-card" data-cat="backend">
+            <h4>Backend</h4>
+            <p>REST basics, auth concepts, and simple APIs.</p>
+            <span class="badge">Node.js</span><span class="badge">Express</span><span class="badge">JSON</span>
+            <div class="skill">
+              <div class="skill-label"><span>Node/Express</span><span>60%</span></div>
+              <div class="bar"><span style="--w:60%"></span></div>
+            </div>
+          </article>
+
+          <!-- Core CS -->
+          <article class="card skill-card" data-cat="core">
+            <h4>Core CS</h4>
+            <p>Strong logic with C, DSA patterns, and OS basics.</p>
+            <span class="badge">C Programming</span><span class="badge">DSA</span><span class="badge">OS Basics</span>
+            <div class="skill">
+              <div class="skill-label"><span>C Programming</span><span>85%</span></div>
+              <div class="bar"><span style="--w:85%"></span></div>
+            </div>
+            <div class="skill">
+              <div class="skill-label"><span>DSA</span><span>70%</span></div>
+              <div class="bar"><span style="--w:70%"></span></div>
+            </div>
+          </article>
+
+          <!-- Tools -->
+          <article class="card skill-card" data-cat="tools">
+            <h4>Tools</h4>
+            <p>Everyday tools for better dev workflow.</p>
+            <span class="badge">Git</span><span class="badge">GitHub</span><span class="badge">VS Code</span>
+            <div class="skill">
+              <div class="skill-label"><span>Git & GitHub</span><span>75%</span></div>
+              <div class="bar"><span style="--w:75%"></span></div>
+            </div>
+          </article>
+
+          <!-- Soft Skills -->
+          <article class="card skill-card" data-cat="soft">
+            <h4>Soft Skills</h4>
+            <p>Communicate well, work in teams, and manage time.</p>
+            <span class="badge">Communication</span><span class="badge">Teamwork</span><span class="badge">Time Mgmt</span>
+            <div class="skill">
+              <div class="skill-label"><span>Communication</span><span>80%</span></div>
+              <div class="bar"><span style="--w:80%"></span></div>
+            </div>
+          </article>
+
+          <!-- Bonus: IoT -->
+          <article class="card skill-card" data-cat="core">
+            <h4>IoT Basics</h4>
+            <p>Sensors, microcontrollers, and simple prototypes.</p>
+            <span class="badge">ESP32</span><span class="badge">Sensors</span><span class="badge">Serial</span>
+            <div class="skill">
+              <div class="skill-label"><span>IoT Concepts</span><span>60%</span></div>
+              <div class="bar"><span style="--w:60%"></span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MATRIX (QUICK VIEW) -->
+    <section class="section" id="matrix">
+      <div class="inner">
+        <h2 class="title">Skill Matrix (Quick View)</h2>
+        <p class="sub">B = Beginner, I = Intermediate, A = Advanced</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Skill</th><th>Level</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>HTML/CSS</td><td class="lvl a">A</td><td>Responsive layouts, animations, UI polish</td></tr>
+              <tr><td>JavaScript</td><td class="lvl i">I</td><td>DOM, events, fetch basics</td></tr>
+              <tr><td>C Programming</td><td class="lvl i">I</td><td>Pointers, arrays, functions</td></tr>
+              <tr><td>DSA</td><td class="lvl i">I</td><td>Arrays, strings, recursion, trees (basic)</td></tr>
+              <tr><td>Git/GitHub</td><td class="lvl i">I</td><td>Branching, PRs, versioning</td></tr>
+              <tr><td>Node/Express</td><td class="lvl b">B</td><td>REST API basics</td></tr>
+              <tr><td>IoT Basics</td><td class="lvl b">B</td><td>ESP32 + sensors</td></tr>
+              <tr><td>Communication</td><td class="lvl i">I</td><td>Presentations & teamwork</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE (LEARNING JOURNEY) -->
+    <section class="section" id="timeline">
+      <div class="inner">
+        <h2 class="title">Learning Journey</h2>
+        <div class="timeline">
+          <div class="t-item"><h4 class="t-title">Phase 1 — Foundations</h4><p>HTML/CSS + C basics + Git daily use</p></div>
+          <div class="t-item"><h4 class="t-title">Phase 2 — JavaScript & DSA</h4><p>DOM, events, fetch; arrays/strings/recursion</p></div>
+          <div class="t-item"><h4 class="t-title">Phase 3 — Backend Basics</h4><p>Node + Express + simple REST APIs</p></div>
+          <div class="t-item"><h4 class="t-title">Phase 4 — Projects</h4><p>Portfolio 2.0, IoT mini, documentation</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="section" id="certs">
+      <div class="inner">
+        <h2 class="title">Certifications</h2>
+        <div class="grid3">
+          <div class="card">
+            <h4>🧾 C Programming (NPTEL)</h4>
+            <p>Core C fundamentals, pointers, problem solving.</p>
+          </div>
+          <div class="card">
+            <h4>🧾 Web Development Basics</h4>
+            <p>HTML5/CSS3 + vanilla JS essentials.</p>
+          </div>
+          <div class="card">
+            <h4>🧾 IoT Fundamentals</h4>
+            <p>ESP32, sensors, serial comm basics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" id="cta">
+      <div class="inner">
+        <div class="cta">
+          <div>
+            <h3 style="margin:0;">Want the full resume?</h3>
+            <p style="margin:4px 0 0;">See projects, education, and achievements in one place.</p>
+          </div>
+          <button class="btn" onclick="window.location.href='./gallery.html'">View Projects</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2025 Kushal Kumar — My Zindagi. All rights reserved.
+  </footer>
+
+<script>
+  // Animate bars when visible
+  const bars = document.querySelectorAll('.bar > span');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const w = el.style.getPropertyValue('--w') || '0%';
+        requestAnimationFrame(()=> el.style.width = w);
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b=> io.observe(b));
+
+  // Filter chips
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.skill-card');
+  let current = 'all';
+  chips.forEach(ch=>{
+    ch.addEventListener('click', ()=>{
+      const f = ch.dataset.filter;
+      // toggle logic: clicking the same chip -> show all
+      if(current === f && f !== 'all'){
+        current = 'all';
+        chips.forEach(c=>c.classList.remove('active'));
+        document.querySelector('[data-filter="all"]').classList.add('active');
+        cards.forEach(card=> card.style.display = '');
+        return;
+      }
+      current = f;
+      chips.forEach(c=>c.classList.toggle('active', c===ch || (f==='all'&&c.dataset.filter==='all')));
+      cards.forEach(card=>{
+        const show = (f==='all') || (card.dataset.cat===f);
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>
+<style>
+  :root{
+    --brand:#00ff88;
+    --brand-soft:#14ffa1;
+    --bg:#0f0f10;
+    --panel:#151617;
+    --ink:#e9f0f1;
+    --muted:#9aa0a6;
+    --card:#161a1b;
+    --accent:#2575fc;
+    --accent-2:#6a11cb;
+    --radius:18px;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  }
+  a{color:inherit; text-decoration:none}
+
+  .wrap{max-width:1100px;margin:auto;padding:40px 16px;}
+  .section{margin:28px 0;background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .inner{padding:22px 18px;}
+  .title{
+    font-size:28px;margin:0 0 12px;color:var(--ink);
+    text-shadow:0 0 14px rgba(0,255,136,.45);
+  }
+  .sub{margin:0 0 16px;color:var(--muted)}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;height:44vh;min-height:320px;overflow:hidden;
+    border-radius:0 0 28px 28px;box-shadow:var(--shadow);
+  }
+  .hero img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55);
+  }
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.65))}
+  .hero-content{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:0 16px}
+  .hero h1{
+    margin:0 0 10px;font-size:40px;color:var(--brand);text-transform:uppercase;
+    text-shadow:0 0 22px rgba(0,255,136,.6);
+  }
+  .hero p{margin:0;color:#eafaf2}
+  @media (max-width:700px){ .hero h1{font-size:30px} }
+
+  /* ===== CONTACT CARDS ===== */
+  .grid3{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+  @media(max-width:900px){ .grid3{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:620px){ .grid3{grid-template-columns:1fr} }
+  .card{
+    background:var(--card);border:1px solid #1f2325;border-radius:14px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.28);
+  }
+  .card h4{margin:0 0 6px;color:#e9fffa}
+  .muted{color:var(--muted)}
+  .card .pill{
+    display:inline-block;margin-top:10px;padding:8px 10px;border-radius:10px;
+    background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.25);color:#bfffe4;font-size:14px;
+  }
+
+  /* ===== FORM ===== */
+  .contact-wrap{display:grid;gap:16px;grid-template-columns:1.1fr .9fr}
+  @media(max-width:900px){ .contact-wrap{grid-template-columns:1fr} }
+  form{
+    background:var(--card);border:1px solid #1f2325;border-radius:14px;padding:16px;
+    box-shadow:0 6px 18px rgba(0,0,0,.28);
+  }
+  label{display:block;font-size:14px;color:#cfe9df;margin-top:8px;margin-bottom:6px}
+  input,textarea{
+    width:100%;padding:12px;border:1px solid #22272a;background:#1e1e1e;color:var(--ink);
+    border-radius:10px;font-size:16px;outline:none;transition:border-color .2s, box-shadow .2s;
+  }
+  textarea{min-height:120px;resize:vertical}
+  input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,117,252,.22)}
+  .row{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+  @media(max-width:620px){ .row{grid-template-columns:1fr} }
+  .btn{
+    width:100%;padding:14px;margin-top:12px;border:none;border-radius:10px;background:var(--accent);
+    color:#fff;font-weight:700;font-size:16px;cursor:pointer;transition:background .2s, transform .05s;
+  }
+  .btn:hover{background:var(--accent-2)}
+  .btn:active{transform:translateY(1px)}
+
+  /* ===== SIDE PANEL ===== */
+  .side{
+    background:var(--card);border:1px solid #1f2325;border-radius:14px;padding:16px;height:100%;
+    box-shadow:0 6px 18px rgba(0,0,0,.28);
+  }
+  .side .whatsapp{
+    display:inline-flex;gap:8px;align-items:center;margin-top:10px;
+    padding:10px 12px;border-radius:12px;background:rgba(0,255,136,.12);border:1px solid rgba(0,255,136,.3);cursor:pointer;
+  }
+
+  /* ===== TOAST ===== */
+  .toast{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
+    background:#102e1f;border:1px solid #1c5f3d;color:#bfffe4;padding:12px 16px;border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:all .3s ease; z-index:9999;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  footer{text-align:center;padding:24px;color:#9fb2a9}
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <img src="./Images/contact/hero.jpg" alt="Contact background">
+    <div class="hero-content">
+      <div>
+        <h1>Contact Me</h1>
+        <p>Have an idea, opportunity, or just want to say hello? Let's connect.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- QUICK CONTACT CARDS -->
+    <section class="section">
+      <div class="inner">
+        <h2 class="title">Quick Contacts</h2>
+        <p class="sub">You can reach me via email, phone, or WhatsApp.</p>
+        <div class="grid3">
+          <div class="card">
+            <h4>📧 Email</h4>
+            <p class="muted">Reply usually within 24 hours.</p>
+            <span class="pill">your-email@example.com</span>
+          </div>
+          <div class="card">
+            <h4>📞 Phone</h4>
+            <p class="muted">Call between 9 AM – 7 PM (IST).</p>
+            <span class="pill">+91-98XXXXXXXX</span>
+          </div>
+          <div class="card">
+            <h4>📍 Location</h4>
+            <p class="muted">Gopalganj, Bihar, India</p>
+            <span class="pill">Open to remote & onsite</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM + SIDE INFO -->
+    <section class="section">
+      <div class="inner">
+        <div class="contact-wrap">
+          <!-- FORM -->
+          <form id="contactForm" novalidate>
+            <h2 class="title" style="margin-top:0">Send a Message</h2>
+
+            <div class="row">
+              <div>
+                <label for="name">Full Name</label>
+                <input id="name" type="text" placeholder="Your name" required />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="you@example.com" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="phone">Phone (optional)</label>
+                <input id="phone" type="tel" placeholder="+91-XXXXXXXXXX" />
+              </div>
+              <div>
+                <label for="subject">Subject</label>
+                <input id="subject" type="text" placeholder="What’s this about?" required />
+              </div>
+            </div>
+
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Write your message..." required></textarea>
+
+            <button class="btn" type="submit">Send Message</button>
+          </form>
+
+          <!-- SIDE INFO -->
+          <aside class="side">
+            <h3 style="margin:0 0 10px;color:#e9fffa">Prefer Quick Chat?</h3>
+            <p class="muted" style="margin-top:0">Ping me on WhatsApp or connect on socials.</p>
+
+            <div class="whatsapp" onclick="openWhatsApp()" title="Chat on WhatsApp">
+              <span>💬</span> <strong>WhatsApp Me</strong>
+            </div>
+
+            <div style="height:12px"></div>
+            <h4 style="margin:12px 0 8px;color:#e9fffa">Follow</h4>
+            <p class="muted" style="margin:0">
+              <a href="#" target="_blank" rel="noopener">LinkedIn</a> •
+              <a href="#" target="_blank" rel="noopener">GitHub</a> •
+              <a href="#" target="_blank" rel="noopener">Instagram</a>
+            </p>
+
+            <div style="height:16px"></div>
+            <h4 style="margin:12px 0 8px;color:#e9fffa">Map (Optional)</h4>
+            <p class="muted" style="margin:0">Embed a map iframe here if you want.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Kushal Kumar — My Zindagi. All rights reserved.
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">Message sent successfully. I’ll get back to you soon! ✅</div>
+
+<script>
+  // ---- WhatsApp quick open (replace with your number) ----
+  function openWhatsApp(){
+    const phone = "91XXXXXXXXXX"; // e.g., 9198XXXXXXXX
+    const text = encodeURIComponent("Hi Kushal! I saw your portfolio and wanted to connect.");
+    window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
+  }
+
+  // ---- Simple client-side validation + fallback submit ----
+  const form = document.getElementById('contactForm');
+  const toast = document.getElementById('toast');
+
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+
+    // Basic checks
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if(!name || !email || !subject || !message){
+      showToast("Please fill all required fields.");
+      return;
+    }
+    // rudimentary email check
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      showToast("Please enter a valid email.");
+      return;
+    }
+
+    // === OPTION A: open mail client (works without backend) ===
+    const mailto = `mailto:your-email@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nPhone: ${document.getElementById('phone').value}\n\n${message}`
+    )}`;
+    window.location.href = mailto;
+
+    // Show success toast
+    showToast("Opening your mail app…");
+    form.reset();
+
+    // === OPTION B (commented): POST to your backend/API ===
+    /*
+    fetch('https://your-api.example.com/contact', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ name, email, phone: document.getElementById('phone').value, subject, message })
+    })
+    .then(r => r.ok ? showToast("Thanks! Your message was sent ✅") : showToast("Could not send. Try again later."))
+    .catch(()=> showToast("Network error. Please try again."));
+    */
+  });
+
+  // ---- Toast helper ----
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(()=> toast.classList.remove('show'), 2500);
+  }
+</script>
 <script>
   function toggleMenu() {
     const menu = document.getElementById('menu');
