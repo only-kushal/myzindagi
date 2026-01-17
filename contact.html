@@ -78,15 +78,17 @@
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
   <ul id="menu">
      <li><a href="./index.html">HOME</a></li>
-     <li><a href="./childhood.html">Childhood</a></li>
-    <li><a href="./school.html">school life</a></li>
-    <li><a href="./collage.html">college life</a></li>
-    <li><a href="./skils.html">skils</a></li>
-    <li><a href="./goals.html">my goals</a></li>
-    <li><a href="./gallery.html">gellery</a></li>
-     <li><a href="./contact.html">Contact</a></li>
-    <li><a href="./about.html">About</a></li>
-    <li><a href="./login.html">Login</a></li>
+     <li><a href="./childhood.html">CHILDHOOD</a></li>
+    <li><a href="./school.html">SCHOOL LIFE</a></li>
+    <li><a href="./collage.html">COLLEGE LIFE</a></li>
+    <li><a href="./skils.html">SKILLS</a></li>
+    <li><a href="./goals.html">MY GOALS</a></li>
+    <li><a href="./gallery.html">GALLERY</a></li>
+     <li><a href="./contact.html">CONTACT</a></li>
+    <li><a href="./about.html">ABOUT</a></li>
+    <li><a href="./login.html">LOGIN</a></li>
+    <li><img id="nightmode" src="gallery_images/night.png" alt="image" height="35px" width="40px"></li>
+
   </ul>
 </nav>
 <style>
@@ -304,6 +306,19 @@
   <div class="toast" id="toast">Message sent successfully. I’ll get back to you soon! ✅</div>
 
 <script>
+   let e=document.getElementById("nightmode")
+let x=function(){
+    e.classList.toggle("night")
+    if(e.classList.contains("night")==true){
+        document.body.style.backgroundColor="gray"
+        document.body.style.color="white"
+    }else{
+        document.body.style.backgroundColor="white"
+        document.body.style.color="black"   
+    }
+
+    }
+    e.addEventListener("click",x)
   // ---- WhatsApp quick open (replace with your number) ----
   function openWhatsApp(){
     const phone = "91XXXXXXXXXX"; // e.g., 9198XXXXXXXX
